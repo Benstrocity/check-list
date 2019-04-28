@@ -12,10 +12,12 @@ const createList = (() => {
     addItem.innerHTML = `Add Item`;
     const version = document.createElement('p');
     version.className = 'version';
+    version.innerHTML = 'v1.0';
 
     app.appendChild(title);
     app.appendChild(inputItem);
     app.appendChild(addItem);
+    app.appendChild(version);
 
     //Adds new item to the list
     addItem.addEventListener('click', () => {
@@ -61,9 +63,6 @@ const createList = (() => {
         removeItem.addEventListener('click', (e) => {
             itemUL.remove(e);
         })
-
-        version.innerHTML = 'v1.0';
-        app.appendChild(version);
     })
 })();
 
