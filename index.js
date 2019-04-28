@@ -10,6 +10,8 @@ const createList = (() => {
     title.innerHTML = `Check List`;
     inputItem.placeholder = `Enter New Item`;
     addItem.innerHTML = `Add Item`;
+    const version = document.createElement('p');
+    version.className = 'version';
 
     app.appendChild(title);
     app.appendChild(inputItem);
@@ -22,9 +24,9 @@ const createList = (() => {
         const itemLI = document.createElement('li');
         itemLI.className = 'itemLI';
         itemLI.innerHTML = inputItem.value;
-        const checkBox = document.createElement('input');
-        checkBox.className = 'checkBox';
-        checkBox.type = 'checkbox';
+        const completeItem = document.createElement('button');
+        completeItem.className = 'completeItem';
+        completeItem.innerHTML = '&#10003';
         const removeItem = document.createElement('button');
         removeItem.className = 'removeItem';
         removeItem.innerHTML = `Remove`;
@@ -33,26 +35,35 @@ const createList = (() => {
         if (inputItem.value !== ''){
             app.appendChild(itemUL);
             itemUL.appendChild(itemLI);
-            itemLI.appendChild(removeItem);
+            itemUL.prepend(completeItem);
+            itemUL.appendChild(removeItem);
         } else {
             alert('You must specify an item to add');
         }
 
         //Checkbox to cross out completed items without deleting them
-        /* checkBox.addEventListener('click', () => {
-            if (itemLI.style.textDecoration !== 'line-through') {
-                itemLI.style.textDecoration = 'line-through';
+        completeItem.addEventListener('click', (e) => {
+            e = itemLI;
+            if (e.style.textDecoration !== 'line-through') {
+                e.style.textDecoration = 'line-through';
+                e.style.fontStyle = 'italic';
+                completeItem.className = 'completeItemTrue';
             } else {
-                itemLI.style.textDecoration = 'none';
+                e.style.textDecoration = 'none';
+                e.style.fontStyle = 'normal';
+                completeItem.className = 'completeItem';
             }
-        })*/
+        })
 
         inputItem.value = ''; //Clears input field after adding item
     
         //Removes item from list
         removeItem.addEventListener('click', (e) => {
-            itemLI.remove(e);
+            itemUL.remove(e);
         })
+
+        version.innerHTML = 'v1.0';
+        app.appendChild(version);
     })
 })();
 
