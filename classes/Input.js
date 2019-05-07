@@ -18,7 +18,7 @@ class Input {
         app.append(add);
 
         add.addEventListener('click', () => {
-            const addToList = new List();
+            new List();
         })
     }
 }
